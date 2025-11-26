@@ -91,7 +91,7 @@ Supports:
 1.  **Clone the repository**
 
 ```bash
-git clone [https://github.com/yourname/env-enum-tool](https://github.com/yourname/env-enum-tool)
+git clone [https://github.com/M1ck3y791/env-enum-tool](https://github.com/M1ck3y791/env-enum-tool)
 cd env-enum-tool
 ````
 
@@ -265,6 +265,3 @@ You can contribute:
 ## 📜 License
 
 **MIT** — free for commercial and personal use.
-
-```
-```
