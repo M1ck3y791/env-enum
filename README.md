@@ -1,267 +1,180 @@
-# ⭐ Environment Enumerator & Endpoint Discovery Toolkit
-High-Performance Async Recon Engine for Pentesters & Bug Hunters
+⭐ env-enum (Legacy – Archived Branch)
+⚠ This branch is deprecated and kept only for reference.
+👉 The actively maintained and improved version now lives in the modular branch`.
+📌 About This Branch
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.9+-yellow?style=flat-square" />
-  <img src="https://img.shields.io/badge/Async-AIOHTTP-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/JS_Analysis-Regex%2FExec-green?style=flat-square" />
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" />
-</p>
+This main branch contains the original monolithic implementation of env-enum, a high‑performance environment enumerator and endpoint discovery toolkit created for:
 
-## 📚 Table of Contents
-* [🔍 Overview](#-overview)
-* [✨ Features](#-features)
-* [📦 Installation](#-installation)
-* [⚙ Usage](#-usage)
-* [🚩 Available Flags](#-available-flags)
-* [📝 Input Format](#-input-format)
-* [📤 Output Format](#-output-format)
-* [📌 Example Commands](#-example-commands)
-* [⚡ Performance Tips](#-performance-tips)
-* [🤝 Contributions](#-contributions)
-* [📜 License](#-license)
+Penetration testers
 
----
+Bug bounty hunters
 
-## 🔍 Overview
-**env\_enum\_tool.py** is a powerful **asynchronous environment enumerator** designed for:
+Red teamers
 
-* **Penetration testers**
-* **Bug bounty hunters**
-* **Red team operators**
-* **Secure code review analysts**
+Recon enthusiasts
 
-Given a list of domains/subdomains, the tool:
+Since the project grew significantly, the architecture has been fully migrated to a modular, plugin‑based structure that is easier to maintain, extend, and customize.
 
-* Generates **environment-based subdomain permutations**
-* Fuzzes **API & backend paths**
-* Detects **Swagger/OpenAPI/GraphQL endpoints**
-* Discovers **SPA-style (/\#/path) hidden URLs**
-* Crawls **JS files & extracts hidden endpoints**
-* Discovers **parameters (?token=, ?auth=, etc.)**
-* Uses **concurrent async HTTP requests** for maximum speed
-* Automatically saves all output to **env-enum.txt**
+🔗 For the current version, visit the modular branch:
+https://github.com/Learn5ec/env-enum/tree/modular
 
----
+🏛 Status of This Version
 
-## ✨ Features
+This legacy version remains available for:
 
-### 🏗 Environment Subdomain Enumeration
-Automatically generates **50+ variants** like:
+Historical reference
 
-* `dev.example.com`
-* `staging.example.com`
-* `uat.example.com`
-* `preview.api.example.com`
-* `v1.example.com`, `v2.example.com`, `beta.example.com`
+Users who want to understand the earlier architecture
 
-### 🧪 Endpoint & API Discovery
-Detects:
+Researchers inspecting the initial async recon engine
 
-* `/swagger`, `/api-docs`, `/swagger-ui`
-* `/openapi.json`, `/openapi.yaml`
-* `/api/v1/`, `/api/v2/`
-* `/graphql`
-* `/internal/`, `/config`, `/admin`
+Backwards compatibility tests
 
-### 🕸 JavaScript Crawling
-Extracts script tags
-Searches inside JS for:
-* `/api/...`
-* `.json configs`
-* `/v1/`, `/v2/`
-* parameters (`id`, `auth`, `session`, `token`, `email`)
+No new features, optimizations, or patches will be applied here.
 
-Supports:
+If you want long-term stability or the latest performance improvements, use the modular branch.
 
-| Mode | Description |
-| :--- | :--- |
-| **regex** | fast text-based extraction |
-| **exec** | uses JS engine to compute dynamically constructed URLs |
+📚 Overview (Legacy Version)
 
-### ⚡ Async High-Concurrency Engine
-* Up to **20× faster** than synchronous recon
-* Configurable concurrency (`--concurrency`)
+The legacy tool performs asynchronous enumeration of:
 
----
+Environment‑based subdomains
 
-## 📦 Installation
-1.  **Clone the repository**
+API and backend endpoints
 
-```bash
-git clone https://github.com/Learn5ec/env-enum
-cd env-enum
-python3 -m venv here
-source here/bin/activate
-````
+Swagger/OpenAPI/GraphQL paths
 
-2.  **Install dependencies**
+SPA-style /#/hidden routes
 
-<!-- end list -->
+JS files for hidden URLs and parameters
 
-```bash
-pip3 install aiohttp py-mini-racer
-```
+Config files & versioned API paths
 
-If you don’t need JS execution:
-
-```bash
-pip3 install aiohttp
-```
-
------
-
-## ⚙ Usage
-
-**Basic run**
-
-```bash
-python3 env-enum.py input.txt
-```
-
-**Debug mode (full details)**
-
-```bash
-python3 env-enum.py input.txt --mode debug
-```
-
-**Quiet mode (no console output)**
-
-```bash
-python3 env-enum.py input.txt --mode quiet
-```
-
-**Regex-only JS parsing (default)**
-
-```bash
-python3 env-enum.py input.txt --jsmode regex
-```
-
-**Evaluate JS expressions**
-
-```bash
-python3 env-enum.py input.txt --jsmode exec
-```
-
-**Boost performance**
-
-```bash
-python3 env-enum.py input.txt --concurrency 150
-```
-
------
-
-## 🚩 Available Flags
-
-### Logging Modes
-
-| Flag | Description |
-| :--- | :--- |
-| `--mode debug` | Full logs: requests, errors, discoveries |
-| `--mode verbose` | Info + discoveries |
-| `--mode discovery` | Default — Only discoveries |
-| `--mode quiet` | Silent mode, writes only to file |
-
-### JS Analysis Modes
-
-| Flag | Description |
-| :--- | :--- |
-| `--jsmode regex` | Regex parsing |
-| `--jsmode exec` | Evaluates JS (requires `py-mini-racer`) |
-
-### Performance Flags
-
-| Flag | Description |
-| :--- | :--- |
-| `--concurrency 80` | Number of async workers |
-
------
-
-## 📝 Input Format
-
-One domain per line:
-
-```
-example.com
-api.example.com
-[https://portal.company.in](https://portal.company.in)
-sub.domain.org
-```
-
-Protocol will be auto-normalized.
-
------
-
-## 📤 Output Format
+It uses a monolithic async engine with baked-in logic and no plugin abstraction.
 
 All results are saved to:
 
-* `env-enum.txt`
+env-enum.txt
 
-Examples:
+✨ Key Features (Legacy)
+🏗 Environment Subdomain Enumeration
 
-```
-[DISCOVERY] [https://dev.example.com/api/v1/login](https://dev.example.com/api/v1/login) [200] Login endpoint
+Generates common patterns such as:
+
+dev.example.com
+staging.example.com
+uat.example.com
+beta.api.example.com
+v1.example.com
+
+🧪 API Discovery
+
+Detects:
+
+/swagger, /swagger-ui, /api-docs
+
+/openapi.json, /openapi.yaml
+
+/api/v1/, /api/v2/
+
+/graphql
+
+/internal/, /config, /admin
+
+🕸 JavaScript Crawling (Legacy Mode)
+
+Supports:
+
+Mode	Description
+regex	Lightweight text-based extraction
+exec	JS evaluation using py-mini-racer
+⚡ Async Recon Engine
+
+High-speed aiohttp-based enumeration.
+
+📦 Installation (Legacy)
+git clone https://github.com/Learn5ec/env-enum
+cd env-enum
+git checkout main   # legacy
+python3 -m venv here
+source here/bin/activate
+pip3 install aiohttp py-mini-racer
+
+
+If JS execution is not required:
+
+pip3 install aiohttp
+
+⚙ Usage (Legacy)
+python3 env-enum.py input.txt
+
+
+Modes:
+
+--mode debug
+--mode verbose
+--mode discovery
+--mode quiet
+
+
+JS modes:
+
+--jsmode regex
+--jsmode exec
+
+
+Set concurrency:
+
+--concurrency 100
+
+🚩 Flags (Legacy)
+Logging Modes
+Flag	Description
+--mode debug	Full logs
+--mode verbose	Info + discoveries
+--mode discovery	Default minimal logs
+--mode quiet	Silence console output
+JS Parsing Modes
+Flag	Description
+--jsmode regex	Regex-based extraction
+--jsmode exec	Executes JS payloads (slower)
+Performance
+Flag	Description
+--concurrency N	Number of async workers
+📝 Input Format
+example.com
+api.example.com
+https://portal.company.in
+sub.domain.org
+
+
+Protocols are auto-normalized.
+
+📤 Output Format
+[DISCOVERY] https://dev.example.com/api/v1/login [200]
 [JS-ENDPOINT] /internal/config
-[API-DOC] [https://app.example.com/swagger.json](https://app.example.com/swagger.json)
+[API-DOC] https://app.example.com/swagger.json
 [PARAM] token
-```
 
-A backup file `env-enum.txt.bak` is created on each run.
 
------
+Backup file is created:
 
-## 📌 Example Commands
+env-enum.txt.bak
 
-🔎 **Run all features with full logs**
-
-```bash
+📌 Example Commands
 python3 env-enum.py targets.txt --mode debug --jsmode exec --concurrency 100
-```
-
-🚀 **Fast scanning, minimal logs**
-
-```bash
 python3 env-enum.py targets.txt --mode discovery --concurrency 150
-```
-
-🧩 **JS crawling only (regex)**
-
-```bash
 python3 env-enum.py targets.txt --jsmode regex
-```
-
-💀 **Fully silent (useful for automation)**
-
-```bash
 python3 env-enum.py targets.txt --mode quiet
-```
 
------
+🤝 Contributions
 
-## ⚡ Performance Tips
+Contributions should target the modular branch, not this one.
 
-  * Increase concurrency (`--concurrency 200`) only on fast networks
-  * Use `--jsmode regex` for faster scans
-  * For large lists, avoid debug mode
-  * Use IP ranges only if needed — JS crawling takes time
+Please go here for active development:
 
------
+➡ https://github.com/Learn5ec/env-enum/tree/modular
 
-## 🤝 Contributions
+📜 License
 
-PRs are welcome\!
-
-You can contribute:
-
-  * New environment patterns
-  * Better regexes
-  * Faster JS extraction
-  * Plugin-like scanners
-  * Bug fixes / optimizations
-
------
-
-## 📜 License
-
-**MIT** — free for commercial and personal use.
+MIT License
