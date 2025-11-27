@@ -2,7 +2,6 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
-
 [project]
 name = "env-enum"
 version = "0.1.0"
@@ -10,25 +9,30 @@ description = "Asynchronous environment & endpoint enumerator with JS crawling."
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
+
 authors = [
   { name = "Your Name", email = "you@example.com" }
 ]
-
-keywords = ["security", "pentest", "recon", "enumeration", "async", "crawler"]
 
 dependencies = [
     "aiohttp>=3.8.0",
     "py-mini-racer>=0.6.0",
 ]
 
-# CLASSIFIERS go here, NOT under scripts
 classifiers = [
     "Environment :: Console",
     "Intended Audience :: Information Technology",
     "Programming Language :: Python :: 3",
     "Topic :: Security",
-    "License :: OSI Approved :: MIT License",
 ]
 
+# Explicitly define the modules at the top level:
+[tool.setuptools]
+py-modules = ["cli", "main", "engine", "scanner"]
+
+# Explicitly define folders that should be treated as packages:
+packages = ["core", "plugins"]
+
+# CLI entrypoint
 [project.scripts]
-env-enum = "env_enum.main:main"
+env-enum = "main:main"
