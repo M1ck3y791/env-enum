@@ -1,11 +1,12 @@
-# ⭐ Environment Enumerator & Endpoint Discovery Toolkit
+# ⚠️ Legacy Branch — env-enum
+⭐ Environment Enumerator & Endpoint Discovery Toolkit
 High-Performance Async Recon Engine for Pentesters & Bug Hunters
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.9+-yellow?style=flat-square" />
   <img src="https://img.shields.io/badge/Async-AIOHTTP-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/JS_Analysis-Regex%2FExec-green?style=flat-square" />
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" />
+  <img src="https://img.shields.io/badge/Status-Legacy-orange?style=flat-square" />
 </p>
 
 ---
