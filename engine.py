@@ -12,7 +12,7 @@ from core.utils import (
     ALL_PATHS, generate_env_subdomains, normalize_host_from_input,
     construct_url
 )
-from scanners.scanner import Scanner
+from scanner import Scanner
 
 
 class EnvEnumerator:
