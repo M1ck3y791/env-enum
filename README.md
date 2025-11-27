@@ -1,267 +1,269 @@
-# ⭐ Environment Enumerator & Endpoint Discovery Toolkit
-High-Performance Async Recon Engine for Pentesters & Bug Hunters
+# ⚡ env-enum (Modular Edition)
+### **Next-Gen Environment Enumerator & Endpoint Discovery Toolkit**
+
+```
+███████╗███╗   ██╗██╗      ██╗      ███████╗███╗   ██╗██╗   ██╗███╗     ███║
+██╔════╝████╗  ██║╚██╗    ██╔╝      ██╔════╝████╗  ██║██║   ██║████╗   ████║
+█████╗  ██╔██╗ ██║ ╚██   ██╔╝       █████╗  ██╔██╗ ██║██║   ██║██ ██╗ ██ ██║
+██╔══╝  ██║╚██╗██║  ╚██ ██╔╝        ██╔══╝  ██║╚██╗██║██╚═══██║██╔═███╔═╗██║
+███████╗██║ ╚████║   ╚███╔╝         ███████╗██║ ╚████║████████║██║ ╚══╝ ║██║
+╚══════╝╚═╝  ╚═══╝    ╚══╝          ╚══════╝╚═╝  ╚═══╝╚═══════╝╚═╝      ╚══╝
+
+             Modular Environment Enumerator & API/JS Recon Engine
+```
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.9+-yellow?style=flat-square" />
-  <img src="https://img.shields.io/badge/Async-AIOHTTP-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/JS_Analysis-Regex%2FExec-green?style=flat-square" />
+  <img src="https://img.shields.io/badge/Architecture-Modular-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Async-AIOHTTP-green?style=flat-square" />
+  <img src="https://img.shields.io/badge/JS_Analysis-Regex%2FExec-purple?style=flat-square" />
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" />
 </p>
 
+---
+
+> ⚙️ **Welcome to the Modular Edition of env-enum!**  
+> This version introduces a *plugin-ready architecture*, faster async engine, cleaner scanning layers, and highly extensible structure.  
+>
+> 🔥 **Awesome plugins coming soon!**
+
+---
+
 ## 📚 Table of Contents
-* [🔍 Overview](#-overview)
-* [✨ Features](#-features)
-* [📦 Installation](#-installation)
-* [⚙ Usage](#-usage)
-* [🚩 Available Flags](#-available-flags)
-* [📝 Input Format](#-input-format)
-* [📤 Output Format](#-output-format)
-* [📌 Example Commands](#-example-commands)
-* [⚡ Performance Tips](#-performance-tips)
-* [🤝 Contributions](#-contributions)
-* [📜 License](#-license)
+- [🚀 Introduction](#-introduction)
+- [🏗 Modular Architecture](#-modular-architecture)
+- [✨ Key Features](#-key-features)
+- [📦 Installation](#-installation)
+- [⚙ Usage](#-usage)
+- [📁 Sample Input File](#-sample-input-file-example-inputtxt)
+- [🧩 Plugins](#-plugins)
+- [📌 Example Commands](#-example-commands)
+- [🛠 Future Improvements](#-future-improvements-ultra-compact)
+- [🤝 Contributions](#-contributions)
+- [📜 License](#-license)
 
 ---
 
-## 🔍 Overview
-**env\_enum\_tool.py** is a powerful **asynchronous environment enumerator** designed for:
+## 🚀 Introduction
 
-* **Penetration testers**
-* **Bug bounty hunters**
-* **Red team operators**
-* **Secure code review analysts**
+The **modular edition** is a complete rewrite focused on:
 
-Given a list of domains/subdomains, the tool:
+- Clean separation between engine, scanner, and config  
+- High-performance asynchronous recon  
+- Plugin architecture for future expansion  
+- Better JS crawling and dynamic string evaluation  
+- More realistic environment subdomain logic  
 
-* Generates **environment-based subdomain permutations**
-* Fuzzes **API & backend paths**
-* Detects **Swagger/OpenAPI/GraphQL endpoints**
-* Discovers **SPA-style (/\#/path) hidden URLs**
-* Crawls **JS files & extracts hidden endpoints**
-* Discovers **parameters (?token=, ?auth=, etc.)**
-* Uses **concurrent async HTTP requests** for maximum speed
-* Automatically saves all output to **env-enum.txt**
+This is the recommended version for **pentesters, bug hunters, red-teamers, and recon automation engineers**.
 
 ---
 
-## ✨ Features
+## 🏗 Modular Architecture
 
-### 🏗 Environment Subdomain Enumeration
-Automatically generates **50+ variants** like:
+```
+env-enum/
+│── cli.py          → CLI argument parsing
+│── main.py         → PyPI entrypoint
+│── engine.py       → Async crawling engine
+│── scanner.py      → JS/HTML/API-doc analyzers
+│── core/
+│    ├── config.py  → Regexes, constants, env prefixes
+│    ├── utils.py   → Normalizers, SPA paths, builders
+│    └── logger.py  → Multi-level logging
+│── plugins/        → 🔥 (Coming Soon) Drop-in scanner plugins
+│── pyproject.toml
+└── requirements.txt
+```
 
-* `dev.example.com`
-* `staging.example.com`
-* `uat.example.com`
-* `preview.api.example.com`
-* `v1.example.com`, `v2.example.com`, `beta.example.com`
+---
 
-### 🧪 Endpoint & API Discovery
+## ✨ Key Features
+
+### ⚡ High-Speed Async Recon
+- `aiohttp` powered  
+- Controlled concurrency  
+- Recursive crawling with smart deduplication  
+
+### 🏗 Environment Subdomain Expansion  
+Automatically generates dozens of permutations such as:
+
+```
+dev.example.com
+qa-api.example.com
+stage-admin.example.com
+preview.app.example.com
+v1.example.com
+sandbox.example.com
+```
+
+### 🕸 JavaScript & JSON Deep Scanning  
+- Regex-based JS endpoint detection  
+- Optional JS evaluation via **py-mini-racer**  
+- Sensitive token pattern recognition  
+- JSON config path extraction  
+
+### 🔍 API Documentation Discovery  
 Detects:
 
-* `/swagger`, `/api-docs`, `/swagger-ui`
-* `/openapi.json`, `/openapi.yaml`
-* `/api/v1/`, `/api/v2/`
-* `/graphql`
-* `/internal/`, `/config`, `/admin`
-
-### 🕸 JavaScript Crawling
-Extracts script tags
-Searches inside JS for:
-* `/api/...`
-* `.json configs`
-* `/v1/`, `/v2/`
-* parameters (`id`, `auth`, `session`, `token`, `email`)
-
-Supports:
-
-| Mode | Description |
-| :--- | :--- |
-| **regex** | fast text-based extraction |
-| **exec** | uses JS engine to compute dynamically constructed URLs |
-
-### ⚡ Async High-Concurrency Engine
-* Up to **20× faster** than synchronous recon
-* Configurable concurrency (`--concurrency`)
+- `swagger.json`
+- `openapi.json`
+- `/graphql`
+- `/api-docs`
+- `/docs`
 
 ---
 
 ## 📦 Installation
-1.  **Clone the repository**
 
 ```bash
-git clone https://github.com/Learn5ec/env-enum
+git clone -b modular https://github.com/Learn5ec/env-enum.git
 cd env-enum
-python3 -m venv here
-source here/bin/activate
-````
-
-2.  **Install dependencies**
-
-<!-- end list -->
-
-```bash
-pip3 install aiohttp py-mini-racer
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
 ```
 
-If you don’t need JS execution:
-
-```bash
-pip3 install aiohttp
-```
-
------
+---
 
 ## ⚙ Usage
 
-**Basic run**
-
 ```bash
-python3 env-enum.py input.txt
+python3 main.py input.txt
 ```
 
-**Debug mode (full details)**
+Optional flags:
 
-```bash
-python3 env-enum.py input.txt --mode debug
+```
+--mode debug|verbose|discovery|quiet
+--jsmode regex|exec
+--concurrency 150
 ```
 
-**Quiet mode (no console output)**
+---
 
-```bash
-python3 env-enum.py input.txt --mode quiet
-```
-
-**Regex-only JS parsing (default)**
-
-```bash
-python3 env-enum.py input.txt --jsmode regex
-```
-
-**Evaluate JS expressions**
-
-```bash
-python3 env-enum.py input.txt --jsmode exec
-```
-
-**Boost performance**
-
-```bash
-python3 env-enum.py input.txt --concurrency 150
-```
-
------
-
-## 🚩 Available Flags
-
-### Logging Modes
-
-| Flag | Description |
-| :--- | :--- |
-| `--mode debug` | Full logs: requests, errors, discoveries |
-| `--mode verbose` | Info + discoveries |
-| `--mode discovery` | Default — Only discoveries |
-| `--mode quiet` | Silent mode, writes only to file |
-
-### JS Analysis Modes
-
-| Flag | Description |
-| :--- | :--- |
-| `--jsmode regex` | Regex parsing |
-| `--jsmode exec` | Evaluates JS (requires `py-mini-racer`) |
-
-### Performance Flags
-
-| Flag | Description |
-| :--- | :--- |
-| `--concurrency 80` | Number of async workers |
-
------
-
-## 📝 Input Format
-
-One domain per line:
+# 📁 Sample Input File Example (input.txt)
 
 ```
 example.com
 api.example.com
-[https://portal.company.in](https://portal.company.in)
-sub.domain.org
+https://portal.company.in
+sub.project.internal
+http://staging.company.io
+www.saasproduct.xyz
+demo.clientapp.org
+login.partner.io
 ```
 
-Protocol will be auto-normalized.
+---
 
------
+## ✔ Supported Formats
 
-## 📤 Output Format
-
-All results are saved to:
-
-* `env-enum.txt`
-
-Examples:
-
+### **Bare domains**
 ```
-[DISCOVERY] [https://dev.example.com/api/v1/login](https://dev.example.com/api/v1/login) [200] Login endpoint
-[JS-ENDPOINT] /internal/config
-[API-DOC] [https://app.example.com/swagger.json](https://app.example.com/swagger.json)
-[PARAM] token
+example.com
+target.xyz
+company.in
 ```
 
-A backup file `env-enum.txt.bak` is created on each run.
+### **Subdomains**
+```
+api.example.com
+dev.company.io
+portal.app.xyz
+```
 
------
+### **Full URLs (HTTP/HTTPS)**
+```
+https://app.example.com
+http://legacy.company.in/login
+```
+
+### **Additional Accepted Styles**
+- Mixed URLs + domains  
+- Any number of lines  
+- Comments (future feature)
+
+---
+
+## ✔ Auto-normalization
+
+Automatically handles:
+
+- Removing protocols  
+- Stripping ports  
+- Cleaning `user@host` patterns  
+- Handling `www.` prefixes  
+- Internal deduplication  
+
+---
+
+## ❌ Not recommended (but accepted gracefully)
+
+- IP addresses (JS crawling makes them slow)  
+- Localhost entries  
+- Invalid TLDs / junk lines  
+
+---
+
+## 🧩 Plugins
+
+> ⚡ **Plugins are first-class citizens in this version.**  
+> Add your own scanners in the `plugins/` directory.
+
+**Coming Soon:**
+- Passive DNS  
+- Cloud metadata probe  
+- Param brute-force plugin  
+- GraphQL introspection  
+
+---
 
 ## 📌 Example Commands
 
-🔎 **Run all features with full logs**
-
 ```bash
-python3 env-enum.py targets.txt --mode debug --jsmode exec --concurrency 100
+python3 main.py scope.txt --mode debug --jsmode exec --concurrency 150
 ```
 
-🚀 **Fast scanning, minimal logs**
-
 ```bash
-python3 env-enum.py targets.txt --mode discovery --concurrency 150
+python3 main.py scope.txt --mode discovery
 ```
 
-🧩 **JS crawling only (regex)**
-
 ```bash
-python3 env-enum.py targets.txt --jsmode regex
+python3 main.py scope.txt --jsmode regex
 ```
 
-💀 **Fully silent (useful for automation)**
-
 ```bash
-python3 env-enum.py targets.txt --mode quiet
+python3 main.py scope.txt --mode quiet
 ```
 
------
+---
 
-## ⚡ Performance Tips
+## 🛠 Future Improvements (Ultra-Compact)
 
-  * Increase concurrency (`--concurrency 200`) only on fast networks
-  * Use `--jsmode regex` for faster scans
-  * For large lists, avoid debug mode
-  * Use IP ranges only if needed — JS crawling takes time
+- Reduce false positives (blank 200s, login redirects, disguised errors)  
+- Smarter subdomain logic (pattern re-use, skip redundant tests)  
+- Basic auth probing (common creds, login form detection)  
+- Arjun integration (auto param merging)  
+- ffuf enhancement (cookies, tokens, POST bodies, cleaner output)  
+- Performance boosts (async pools, caching, pruning)  
+- QoL features (screenshots, retries, framework fingerprinting)
 
------
+🔥 **And a full plugin ecosystem!**
+
+---
 
 ## 🤝 Contributions
 
-PRs are welcome\!
+PRs welcome!  
+Please contribute:
 
-You can contribute:
+- Plugins  
+- Performance improvements  
+- JS extraction logic  
+- Regex signatures  
 
-  * New environment patterns
-  * Better regexes
-  * Faster JS extraction
-  * Plugin-like scanners
-  * Bug fixes / optimizations
-
------
+---
 
 ## 📜 License
 
-**MIT** — free for commercial and personal use.
+MIT License — free for personal & commercial use.
